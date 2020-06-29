@@ -1,4 +1,4 @@
-# Covid19
+# [Covid19-tracker](https://janesh98.github.io/covid-19-tracker/index.html)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.5.
 
