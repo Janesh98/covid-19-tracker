@@ -1,0 +1,10 @@
+<h1>Total Cases: {{this.totalCases | number}}</h1>
+
+<google-chart style="width: 100%;" #chart
+   [title]="title"
+   [type]="type"
+   [data]="data"
+   [columns]="columnNames"
+   [height] = "height"
+   [dynamicResize]="dynamicResize">
+</google-chart>
