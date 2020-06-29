@@ -1,0 +1,26 @@
+.row {
+    text-align: center;
+}
+
+.confirmed {
+    font-size: xx-large;
+    font-weight: 500;
+
+}
+
+.recovered {
+    font-weight: 500;
+    color: green;
+    font-size: xx-large;
+}
+
+.deaths {
+    color: red;
+    font-size: xx-large;
+    font-weight: 500;
+
+}
+
+span {
+    font-size: medium;
+  }

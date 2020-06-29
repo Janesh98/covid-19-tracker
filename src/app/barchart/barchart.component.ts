@@ -20,16 +20,12 @@ export class BarchartComponent implements OnInit {
   countryCode = 'ie';
 
   // covid stats
-  totalCases: number;
   dailyTotalConfirmed: number[] = [];
   dailyNewConfirmed: number[] = [];
 
   constructor(private covid19: Covid19Service) { }
 
   ngOnInit() {
-    //const { getCode, getName } = require('country-list');
-    //console.log(getName('us'));
-    //console.log(getCode('ireland'));
     this.getCountryAndCalculateDailyNewConfirmed();
   }
 
@@ -39,10 +35,6 @@ export class BarchartComponent implements OnInit {
       total = total + n;
     }
     return total;
-  }
-
-  getSummary() {
-    return this.covid19.getSummary();
   }
 
   getCountry() {
@@ -78,15 +70,9 @@ export class BarchartComponent implements OnInit {
         const cases = data[key].Cases;
         this.dailyTotalConfirmed.push(cases);
       }
-      this.setTotalCases();
       this.calculateDailyNewConfirmed();
-      //console.log(this.dailyNewConfirmed);
       this.data = this.generate_xy();
     });
-  }
-
-  setTotalCases() {
-    this.totalCases = this.dailyTotalConfirmed[this.dailyTotalConfirmed.length - 1];
   }
 
   generate_xy() {
@@ -97,7 +83,6 @@ export class BarchartComponent implements OnInit {
       const y = cases[x];
       data.push([x, y]);
     }
-    //console.log(data);
     return data;
   }
 

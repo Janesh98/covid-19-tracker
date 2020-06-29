@@ -6,17 +6,16 @@ import { HttpClient } from '@angular/common/http';
 })
 export class Covid19Service {
   baseUrl = 'https://api.covid19api.com/';
+  altBaseUrl = 'https://covidapi.info/api/v1/country/';
 
   constructor(private http: HttpClient) { }
 
-  getSummary() {
-    return this.http.get(this.baseUrl + 'summary').subscribe(data => {
-      console.log(data);
-    });
+  getCountryStats(country: string) {
+    return this.http.get(this.altBaseUrl + country + '/latest');
   }
 
-  getCountry() {
-    return this.http.get(this.baseUrl + 'dayone/country/ie/status/confirmed');
+  getCountry(country = 'ireland') {
+    return this.http.get(this.baseUrl + 'dayone/country/' + country + '/status/confirmed');
   }
 
 }
