@@ -5,17 +5,17 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class Covid19Service {
-  baseUrl = 'https://api.covid19api.com/';
-  altBaseUrl = 'https://covidapi.info/api/v1/country/';
+  url = 'https://api.covid19api.com/';
+  altUrl = 'https://corona.lmao.ninja/v2/countries/';
 
   constructor(private http: HttpClient) { }
 
-  getCountryStats(country: string) {
-    return this.http.get(this.altBaseUrl + country + '/latest');
+  getCountry(country = 'ireland') {
+    return this.http.get(this.url + 'dayone/country/' + country + '/status/confirmed');
   }
 
-  getCountry(country = 'ireland') {
-    return this.http.get(this.baseUrl + 'dayone/country/' + country + '/status/confirmed');
+  getTest(country) {
+    return this.http.get(this.altUrl + country);
   }
 
 }
