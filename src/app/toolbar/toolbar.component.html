@@ -2,7 +2,7 @@
   <mat-toolbar>
     <span>COVID-19 Tracker</span>
 
-    <form #country="ngForm" (ngSubmit)="register(country)" class="search-form">
+    <form #country="ngForm" (ngSubmit)="changeCountry(country)" class="search-form">
       <mat-form-field class="search">
         <mat-label>Country</mat-label>
         <input name=country matInput placeholder="Ireland" ngModel required>

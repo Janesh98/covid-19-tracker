@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Covid19Service } from '../services/covid19.service';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-barchart',
@@ -8,8 +9,10 @@ import { Covid19Service } from '../services/covid19.service';
 })
 
 export class BarchartComponent implements OnInit {
+  country: string;
+
   // chart settings
-  title = 'Covid19 Daily Cases';
+  title = 'Ireland Covid19 Daily Cases';
   errorMessage: string;
   type = 'LineChart';
   data: any = [];
@@ -17,16 +20,22 @@ export class BarchartComponent implements OnInit {
   height = 500;
   dynamicResize = true;
 
-  countryCode = 'ie';
-
   // covid stats
   dailyTotalConfirmed: number[] = [];
   dailyNewConfirmed: number[] = [];
 
-  constructor(private covid19: Covid19Service) { }
+  constructor(private covid19: Covid19Service, private shared: SharedService ) { }
 
   ngOnInit() {
-    this.getCountryAndCalculateDailyNewConfirmed();
+    this.shared.currentMessage.subscribe(message => this.updateCountry(message));
+    this.getCountryAndCalculateDailyNewConfirmed(this.country);
+  }
+
+  updateCountry(country) {
+    this.country = country;
+    const title = this.title.split(' ').slice(1);
+    this.title = country + ' ' +  title.join(' ');
+    this.getCountryAndCalculateDailyNewConfirmed(country);
   }
 
   sum(list: any) {
@@ -37,8 +46,8 @@ export class BarchartComponent implements OnInit {
     return total;
   }
 
-  getCountry() {
-    this.covid19.getCountry()
+  getCountry(country) {
+    this.covid19.getCountry(country)
     .subscribe(data => {
       const covid = Object.keys(data);
 
@@ -51,25 +60,30 @@ export class BarchartComponent implements OnInit {
 
   calculateDailyNewConfirmed() {
     const data = this.dailyTotalConfirmed;
+    const dailyNewConfirmed: number[] = [];
 
     for (let i = 0; i < data.length - 1; i++) {
       const casesToday = data[i];
       const casesTomorrow = data[i + 1];
 
-      this.dailyNewConfirmed.push(Math.abs(casesTomorrow - casesToday));
+      dailyNewConfirmed.push(Math.abs(casesTomorrow - casesToday));
     }
+
+    this.dailyNewConfirmed = dailyNewConfirmed;
     // this.drawChart();
   }
 
-  getCountryAndCalculateDailyNewConfirmed() {
-    this.covid19.getCountry()
+  getCountryAndCalculateDailyNewConfirmed(country) {
+    this.covid19.getCountry(country)
     .subscribe(data => {
       const covid = Object.keys(data);
+      const newDailyTotalConfirmed: number[] = [];
 
       for (const key of covid) {
         const cases = data[key].Cases;
-        this.dailyTotalConfirmed.push(cases);
+        newDailyTotalConfirmed.push(cases);
       }
+      this.dailyTotalConfirmed = newDailyTotalConfirmed;
       this.calculateDailyNewConfirmed();
       this.data = this.generate_xy();
     });

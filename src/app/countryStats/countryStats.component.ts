@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Covid19Service } from '../services/covid19.service';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-country-stats',
@@ -8,20 +9,28 @@ import { Covid19Service } from '../services/covid19.service';
 })
 export class CountryStatsComponent implements OnInit {
 
+  country: string;
+
   confirmed: number;
   recovered: number;
   deaths: number;
   countryCode: string;
 
-  constructor(private covid19: Covid19Service) { }
+  constructor(private covid19: Covid19Service, private shared: SharedService) { }
 
   ngOnInit() {
     // this.getCountryStats('IRL');
-    this.getTest('ireland');
+    this.shared.currentMessage.subscribe(message => this.updateCountry(message));
+    this.getCountryStats('ireland');
   }
 
-  getTest(country: string) {
-    this.covid19.getTest(country).subscribe(data => {
+  updateCountry(country) {
+    this.country = country;
+    this.getCountryStats(country);
+  }
+
+  getCountryStats(country: string) {
+    this.covid19.getCountryStats(country).subscribe(data => {
       // tslint:disable-next-line: no-string-literal
       this.confirmed = data['cases'];
       // tslint:disable-next-line: no-string-literal

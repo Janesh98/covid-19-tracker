@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { SharedService } from '../services/shared.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -7,17 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
+  message: string;
   country: string;
 
-  constructor() { }
+  constructor(private shared: SharedService) { }
 
   ngOnInit() {
+    this.shared.currentMessage.subscribe(message => this.message = message);
   }
 
-  register(form) {
-    const country = form.value.country;
-    console.log(country);
+  changeCountry(input) {
+    const country = input.value.country;
     this.country = country;
+    this.shared.changeMessage(country);
   }
 
 }

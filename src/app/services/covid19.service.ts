@@ -10,11 +10,11 @@ export class Covid19Service {
 
   constructor(private http: HttpClient) { }
 
-  getCountry(country = 'ireland') {
+  getCountry(country: string) {
     return this.http.get(this.url + 'dayone/country/' + country + '/status/confirmed');
   }
 
-  getTest(country) {
+  getCountryStats(country: string) {
     return this.http.get(this.altUrl + country);
   }
 
