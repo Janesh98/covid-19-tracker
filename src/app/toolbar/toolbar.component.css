@@ -1,3 +1,11 @@
 .example-spacer {
     flex: 1 1 auto;
   }
+
+.search-form {
+  padding-left: 32.5%;
+}
+
+.search {
+  width: 100%;
+}

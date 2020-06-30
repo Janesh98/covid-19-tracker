@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
 
+  country: string;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  register(form) {
+    const country = form.value.country;
+    console.log(country);
+    this.country = country;
   }
 
 }

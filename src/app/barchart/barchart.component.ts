@@ -9,7 +9,7 @@ import { Covid19Service } from '../services/covid19.service';
 
 export class BarchartComponent implements OnInit {
   // chart settings
-  title = 'covid19';
+  title = 'Covid19 Daily Cases';
   errorMessage: string;
   type = 'LineChart';
   data: any = [];
