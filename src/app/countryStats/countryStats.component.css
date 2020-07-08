@@ -24,3 +24,15 @@
 span {
     font-size: medium;
   }
+
+.country {
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+}
+
+.flag {
+    outline-width: 1px;
+    outline-style: solid;
+    outline-color: grey;
+}

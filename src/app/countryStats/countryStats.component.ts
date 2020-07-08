@@ -15,22 +15,24 @@ export class CountryStatsComponent implements OnInit {
   recovered: number;
   deaths: number;
   countryCode: string;
+  flag: string;
 
   constructor(private covid19: Covid19Service, private shared: SharedService) { }
 
   ngOnInit() {
-    // this.getCountryStats('IRL');
     this.shared.currentMessage.subscribe(message => this.updateCountry(message));
     this.getCountryStats('ireland');
   }
 
-  updateCountry(country) {
+  updateCountry(country: string) {
     this.country = country;
     this.getCountryStats(country);
   }
 
   getCountryStats(country: string) {
     this.covid19.getCountryStats(country).subscribe(data => {
+      // tslint:disable-next-line: no-string-literal
+      this.flag = data['countryInfo']['flag'];
       // tslint:disable-next-line: no-string-literal
       this.confirmed = data['cases'];
       // tslint:disable-next-line: no-string-literal

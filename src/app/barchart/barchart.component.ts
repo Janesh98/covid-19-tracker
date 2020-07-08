@@ -9,10 +9,10 @@ import { SharedService } from '../services/shared.service';
 })
 
 export class BarchartComponent implements OnInit {
-  country: string;
+  country = 'ireland';
 
   // chart settings
-  title = 'Ireland Covid19 Daily Cases';
+  title = 'Covid19 Daily Cases';
   errorMessage: string;
   type = 'LineChart';
   data: any = [];
@@ -33,8 +33,8 @@ export class BarchartComponent implements OnInit {
 
   updateCountry(country) {
     this.country = country;
-    const title = this.title.split(' ').slice(1);
-    this.title = country + ' ' +  title.join(' ');
+    // const title = this.title.split(' ').slice(1);
+    // this.title = country + ' ' +  title.join(' ');
     this.getCountryAndCalculateDailyNewConfirmed(country);
   }
 
