@@ -8,14 +8,14 @@
 <div id="stats" class="row">
   <div class="col">
     <h1 class="confirmed">{{this.confirmed | number}}</h1>
-    <span>Confirmed</span>
+    <span matBadge="+{{this.todayCases | number}}" matBadgeSize="small" matBadgeOverlap="false" matBadgeColor="accent">Confirmed</span>
   </div>
   <div class="col">
     <h1 class="recovered">{{this.recovered | number}}</h1>
-    <span>Recovered</span>
+    <span matBadge="+{{this.todayRecovered | number}}" matBadgeSize="small" matBadgeOverlap="false" matBadgeColor="secondary">Recovered</span>
   </div>
   <div class="col">
     <h1 class="deaths">{{this.deaths | number}}</h1>
-    <span>Deaths</span>
+    <span matBadge="+{{this.todayDeaths | number}}" matBadgeSize="small" matBadgeOverlap="false" matBadgeColor="warn">Deaths</span>
   </div>
 </div>

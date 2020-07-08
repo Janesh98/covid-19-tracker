@@ -10,12 +10,16 @@ import { SharedService } from '../services/shared.service';
 export class CountryStatsComponent implements OnInit {
 
   country: string;
+  countryCode: string;
+  flag: string;
 
   confirmed: number;
   recovered: number;
   deaths: number;
-  countryCode: string;
-  flag: string;
+
+  todayCases: string;
+  todayRecovered: string;
+  todayDeaths: string;
 
   constructor(private covid19: Covid19Service, private shared: SharedService) { }
 
@@ -31,13 +35,12 @@ export class CountryStatsComponent implements OnInit {
 
   getCountryStats(country: string) {
     this.covid19.getCountryStats(country).subscribe(data => {
-      // tslint:disable-next-line: no-string-literal
+      this.todayCases = data['todayCases'];
+      this.todayRecovered = data['todayRecovered'];
+      this.todayDeaths = data['todayDeaths'];
       this.flag = data['countryInfo']['flag'];
-      // tslint:disable-next-line: no-string-literal
       this.confirmed = data['cases'];
-      // tslint:disable-next-line: no-string-literal
       this.recovered = data['recovered'];
-      // tslint:disable-next-line: no-string-literal
       this.deaths = data['deaths'];
     });
   }
