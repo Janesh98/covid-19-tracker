@@ -23,6 +23,7 @@ export class BarchartComponent implements OnInit {
   // covid stats
   dailyTotalConfirmed: number[] = [];
   dailyNewConfirmed: number[] = [];
+  dates: string[] = [];
 
   constructor(private covid19: Covid19Service, private shared: SharedService ) { }
 
@@ -78,26 +79,50 @@ export class BarchartComponent implements OnInit {
     .subscribe(data => {
       const covid = Object.keys(data);
       const newDailyTotalConfirmed: number[] = [];
+      const dates: string[] = [];
 
       for (const key of covid) {
         const cases = data[key].Cases;
+        const date = data[key].Date;
         newDailyTotalConfirmed.push(cases);
+        dates.push(date);
       }
       this.dailyTotalConfirmed = newDailyTotalConfirmed;
+      this.dates = dates;
       this.calculateDailyNewConfirmed();
-      this.data = this.generate_xy();
+      this.data = this.generateXY();
     });
   }
 
-  generate_xy() {
+  generateXY() {
     const data = [];
     const cases = this.dailyNewConfirmed;
     for (let i = 0; i < cases.length; i++) {
       const x = i.toString();
       const y = cases[x];
-      data.push([x, y]);
+      let date = this.dates[i];
+      date = this.formatDate(date);
+      data.push([date, y]);
     }
     return data;
+  }
+
+  // format date to look nicer
+  // 2020-02-29T00:00:00Z to 29/02/20
+  formatDate(dateTime: string) {
+    // get only date by removing time
+    dateTime = dateTime.split('T')[0];
+
+    // split into [year, month, day]
+    let date = dateTime.split('-');
+
+    // convert to d-m-y
+    date = date.reverse();
+
+    // shorten year from 2020 to 20
+    date[2] = date[2].substring(2);
+
+    return date.join('-');
   }
 
 }
