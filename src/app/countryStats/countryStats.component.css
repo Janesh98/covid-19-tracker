@@ -36,3 +36,11 @@ span {
     outline-style: solid;
     outline-color: grey;
 }
+
+.mat-badge-content {
+    position: relative;
+    width: auto;
+    min-width: 18px;
+    min-height: 18px;
+    text-align: center center;
+}

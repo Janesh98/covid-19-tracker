@@ -15,7 +15,7 @@ export class Covid19Service {
   }
 
   getCountryStats(country: string) {
-    return this.http.get(this.altUrl + country);
+    return this.http.get(this.altUrl + country + '?yesterday=true&strict=true&query');
   }
 
 }
