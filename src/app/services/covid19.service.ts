@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class Covid19Service {
   url = 'https://api.covid19api.com/';
   altUrl = 'https://corona.lmao.ninja/v2/countries/';
+  diseaseUrl = 'https://disease.sh/v3/covid-19/historical/';
 
   constructor(private http: HttpClient) { }
 
@@ -16,6 +17,10 @@ export class Covid19Service {
 
   getCountryStats(country: string) {
     return this.http.get(this.altUrl + country + '?yesterday=true&strict=true&query');
+  }
+
+  getCountryTimeline(country: string) {
+    return this.http.get(this.diseaseUrl + country + '?lastdays=120');
   }
 
 }

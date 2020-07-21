@@ -45,8 +45,6 @@ export class BarchartComponent implements OnInit {
 
   updateCountry(country) {
     this.country = country;
-    // const title = this.title.split(' ').slice(1);
-    // this.title = country + ' ' +  title.join(' ');
     this.getCountryAndCalculateDailyNewConfirmed(country);
   }
 
@@ -62,24 +60,16 @@ export class BarchartComponent implements OnInit {
     }
 
     this.dailyNewConfirmed = dailyNewConfirmed;
-    // this.drawChart();
   }
 
   getCountryAndCalculateDailyNewConfirmed(country) {
-    this.covid19.getCountry(country)
+    this.covid19.getCountryTimeline(country)
     .subscribe(data => {
-      const covid = Object.keys(data);
-      const newDailyTotalConfirmed: number[] = [];
-      const dates: string[] = [];
+      // tslint:disable-next-line: no-string-literal
+      const cases = data['timeline']['cases'];
 
-      for (const key of covid) {
-        const cases = data[key].Cases;
-        const date = data[key].Date;
-        newDailyTotalConfirmed.push(cases);
-        dates.push(date);
-      }
-      this.dailyTotalConfirmed = newDailyTotalConfirmed;
-      this.dates = dates;
+      this.dailyTotalConfirmed = Object.values(cases);
+      this.dates = Object.keys(cases);
       this.calculateDailyNewConfirmed();
       this.data = this.generateXY();
     });
@@ -91,15 +81,15 @@ export class BarchartComponent implements OnInit {
     for (let i = 0; i < cases.length; i++) {
       const x = i.toString();
       const y = cases[x];
-      let date = this.dates[i];
-      date = this.formatDate(date);
+      const date = this.dates[i];
+      // date = this.formatDate(date);
       data.push([date, y]);
     }
     return data;
   }
 
   // format date to look nicer
-  // 2020-02-29T00:00:00Z to 29/02/20
+  // 2020-02-29T00:00:00Z to 29-02-20
   formatDate(dateTime: string) {
     // get only date by removing time
     dateTime = dateTime.split('T')[0];
