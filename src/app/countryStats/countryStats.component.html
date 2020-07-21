@@ -7,15 +7,24 @@
 
 <div id="stats" class="row">
   <div class="col">
-    <h1 class="confirmed">{{this.confirmed | number}}</h1>
-    <span matBadge="+{{this.todayCases | number}}" matBadgeSize="small" matBadgeOverlap="false" matBadgeColor="accent">Confirmed</span>
+    <mat-card>
+      <mat-card-title class="confirmed">{{this.confirmed | number}}</mat-card-title>
+      <mat-card-subtitle>+{{this.todayCases | number}}</mat-card-subtitle>
+      <span>Confirmed</span>
+    </mat-card>
   </div>
   <div class="col">
-    <h1 class="recovered">{{this.recovered | number}}</h1>
-    <span matBadge="+{{this.todayRecovered | number}}" matBadgeSize="small" matBadgeOverlap="false" matBadgeColor="secondary">Recovered</span>
+    <mat-card>
+      <mat-card-title class="recovered">{{this.recovered | number}}</mat-card-title>
+      <mat-card-subtitle>+{{this.todayRecovered | number}}</mat-card-subtitle>
+      <span>Recovered</span>
+    </mat-card>
   </div>
   <div class="col">
-    <h1 class="deaths">{{this.deaths | number}}</h1>
-    <span matBadge="+{{this.todayDeaths | number}}" matBadgeSize="small" matBadgeOverlap="false" matBadgeColor="warn">Deaths</span>
+    <mat-card>
+      <mat-card-title class="deaths">{{this.deaths | number}}</mat-card-title>
+      <mat-card-subtitle>+{{this.todayDeaths | number}}</mat-card-subtitle>
+      <span>Deaths</span>
+    </mat-card>
   </div>
 </div>

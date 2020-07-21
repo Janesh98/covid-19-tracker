@@ -14,7 +14,7 @@ export class BarchartComponent implements OnInit {
   // chart settings
   title = 'Covid19 Daily Cases';
   errorMessage: string;
-  type = 'LineChart';
+  type = 'AreaChart';
   data: any = [];
   columnNames = ['Date', 'Daily Cases'];
   height = 500;

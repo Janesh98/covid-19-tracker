@@ -9,7 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import {MatBadgeModule} from '@angular/material/badge';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { BarchartComponent } from './barchart/barchart.component';
@@ -32,7 +32,7 @@ import { CountryStatsComponent } from './countryStats/countryStats.component';
       MatInputModule,
       MatIconModule,
       FormsModule,
-      MatBadgeModule
+      MatCardModule
    ],
    providers: [],
    bootstrap: [
