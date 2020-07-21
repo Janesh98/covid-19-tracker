@@ -16,9 +16,20 @@ export class BarchartComponent implements OnInit {
   errorMessage: string;
   type = 'LineChart';
   data: any = [];
-  columnNames = ['Day', 'Daily Cases'];
+  columnNames = ['Date', 'Daily Cases'];
   height = 500;
   dynamicResize = true;
+  options = {
+    // smooth data
+    curveType : 'function',
+    // set min y axis value to 0
+    vAxis: {
+      viewWindowMode: 'explicit',
+      viewWindow: {
+        min: 0
+      }
+  },
+  };
 
   // covid stats
   dailyTotalConfirmed: number[] = [];
@@ -37,26 +48,6 @@ export class BarchartComponent implements OnInit {
     // const title = this.title.split(' ').slice(1);
     // this.title = country + ' ' +  title.join(' ');
     this.getCountryAndCalculateDailyNewConfirmed(country);
-  }
-
-  sum(list: any) {
-    let total = 0;
-    for (const n of list) {
-      total = total + n;
-    }
-    return total;
-  }
-
-  getCountry(country) {
-    this.covid19.getCountry(country)
-    .subscribe(data => {
-      const covid = Object.keys(data);
-
-      for (const key of covid) {
-        const cases = data[key].Cases;
-        this.dailyTotalConfirmed.push(cases);
-      }
-    });
   }
 
   calculateDailyNewConfirmed() {
