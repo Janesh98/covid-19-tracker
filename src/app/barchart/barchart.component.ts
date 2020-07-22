@@ -10,7 +10,7 @@ import { SharedService } from '../services/shared.service';
 
 export class BarchartComponent implements OnInit {
   country = 'ireland';
-
+  
   // chart settings
   title = 'Covid19 Daily Cases';
   errorMessage: string;
