@@ -10,18 +10,22 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
 
 import { AppComponent } from './app.component';
 import { BarchartComponent } from './barchart/barchart.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { CountryStatsComponent } from './countryStats/countryStats.component';
+import { CountryTotalsTableComponent } from './countryTotalsTable/countryTotalsTable.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
    declarations: [
       AppComponent,
       BarchartComponent,
       ToolbarComponent,
-      CountryStatsComponent
+      CountryStatsComponent,
+      CountryTotalsTableComponent
    ],
    imports: [
       BrowserModule,
@@ -32,7 +36,9 @@ import { CountryStatsComponent } from './countryStats/countryStats.component';
       MatInputModule,
       MatIconModule,
       FormsModule,
-      MatCardModule
+      MatCardModule,
+      MatTableModule,
+      NgbModule
    ],
    providers: [],
    bootstrap: [

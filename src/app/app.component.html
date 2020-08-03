@@ -1,5 +1,10 @@
-<body>
-    <app-toolbar></app-toolbar>
-    <app-country-stats></app-country-stats>
-    <app-barchart></app-barchart>
-<body>
+<app-toolbar></app-toolbar>
+<app-country-stats></app-country-stats>
+<div class="row linechart-table-container">
+    <div class="col">
+        <app-barchart></app-barchart>
+    </div>
+    <div class="col">
+        <app-country-totals-table></app-country-totals-table>
+    </div>
+</div>

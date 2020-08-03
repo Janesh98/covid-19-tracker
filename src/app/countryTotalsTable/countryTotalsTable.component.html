@@ -1,0 +1,25 @@
+<div class="table-container">
+  <mat-card class="table-card">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Country</th>
+        <th scope="col">Confirmed</th>
+        <th scope="col">Recovered</th>
+        <th scope="col">Deaths</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let country of countries;">
+        <td>
+          <img [src]="country.countryInfo.flag" class="mr-2" style="width: 20px">
+          {{ country.country }}
+        </td>
+        <td>{{ country.cases | number }}</td>
+        <td>{{ country.recovered | number }}</td>
+        <td>{{ country.deaths | number }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-card>
+</div>

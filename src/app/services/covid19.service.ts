@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Country } from '../interfaces/country';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class Covid19Service {
   url = 'https://api.covid19api.com/';
   altUrl = 'https://corona.lmao.ninja/v2/countries/';
-  diseaseUrl = 'https://disease.sh/v3/covid-19/historical/';
+  diseaseUrl = 'https://disease.sh/v3/covid-19/';
+  countryTotalsUrl = 'https://disease.sh/v3/covid-19/countries?yesterday=true&sort=cases&allowNull=false';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +23,11 @@ export class Covid19Service {
   }
 
   getCountryTimeline(country: string) {
-    return this.http.get(this.diseaseUrl + country + '?lastdays=120');
+    return this.http.get(this.diseaseUrl + 'historical/' + country + '?lastdays=120');
+  }
+
+  getCountriesTotals(): Observable<Country[]> {
+    return this.http.get<Country[]>(this.countryTotalsUrl);
   }
 
 }
